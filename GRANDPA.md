@@ -1,3 +1,8 @@
+# Notes and questions about Grandpa:
+
+# 1 Based on the documentation
+[Finality documentation](https://spec.polkadot.network/sect-finality)
+
 
 Notes:
 - $B' > B$ means B' descendant of B.
@@ -17,3 +22,6 @@ Notes:
 A vote for a descendant B' is also a vote for B. 
 - [Alg16](https://spec.polkadot.network/sect-finality#algo-grandpa-best-candidate) I cannot find a definition for $H_n$, should this be $H_i$? Same counts in Alg17.
 - [Alg18](https://spec.polkadot.network/sect-finality#algo-best-prevote-candidate) Is $L$ the BestFinalCandidate(r-1) from Alg17?
+
+### Problem:
+I believe the description in the documentation has a problem, since it allows only blocks, that have received pre-votes in earlier rounds, to receive prevotes in the next round.

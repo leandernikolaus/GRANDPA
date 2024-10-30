@@ -3,6 +3,8 @@
     "Dafny",
     "Dirdal",
     "Jehl",
+    "Paxos",
+    "PBFT",
     "TLAPS"
   ]
 }

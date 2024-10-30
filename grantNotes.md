@@ -54,16 +54,16 @@ This project focuses on the study of finality gadgets, such as GRANDPA, in contr
 
 ## #1 Interface and Modeling
 
-The goal for the first stage is to create a simplified model of GRANDPA, that allows both to produce live traces and a proof of safety properties.
+The goal of the first stage is to create a simplified model of GRANDPA that supports both generation of live traces and proving safety properties.
 
-For this part we will heavily rely on our experience from the formal verification of the HotStuff algorithm [1].
-In our work on the HotStuff algorithm, we did model consensus on a tree of blocks, rather than in the classical view instance matrix used in algorithms like Paxos, PBFT and others.
-Similarly we adjusted safety properties the tree structure.
-Instead of requiring that no two different values are decided in one instance, we require that any two finalized blocks are ancestors, i.e. due not lie on different forks.
+This stage will build on our prior experience with the formal verification of the [HotStuff algorithm][1].
+In our work on the HotStuff algorithm, we modeled consensus on a tree of blocks rather than the classical view instance matrix used by algorithms like Paxos and PBFT.
+We adjusted the safety properties to fit this tree structure.
+Instead of requiring that no two distinct values are decided in a single instance, we defined safety such that any two finalized blocks must be ancestors, preventing divergence into separate forks.
 
-We found that a main challenge in the formal treatment of consensus algorithms working on a tree-model is that they heavily rely on the ancestor relation between blocks in the tree.
-This is even more the case for GRANDPA, where a vote on one block counts as a vote for the blocks ancestors.
-In our work, we already proved lemmas and defined auxiliary invariants about the ancestor relation, that will be similarly useful in the formalization of GRANDPA.
+The main challenge we encountered when formally verifying tree-based consensus algorithms was the reliance on the ancestor relationship among blocks.
+This is even more pronounced in GRANDPA, where a vote on one block counts as a vote for all of its ancestors.
+In our previous work, we established lemmas and auxiliary invariants around this ancestor relationship, which will be instrumental in our formalization of GRANDPA.
 
 ### Interface and Properties
 
@@ -187,3 +187,5 @@ The group also has experience with test case generation [Hein].
 [2]: https://github.com/leandernikolaus/HotStuff-ivy
 [3]: https://doi.org/10.1145/3528535.3531516
 [4]: https://github.com/leandernikolaus/splitbft-proofs
+
+---

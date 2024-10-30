@@ -178,7 +178,12 @@ The group also has experience with test case generation [Hein].
 
 ## References
 
-- [HotStuff] _Formal Verification of HotStuff_. In: FORTE 2021 [https://doi.org/10.1007/978-3-030-78089-0_13](https://doi.org/10.1007/978-3-030-78089-0_13)
-- [HotStuff spec] _Specification and proof in Ivy and TLAPS_ [https://github.com/leandernikolaus/HotStuff-ivy](https://github.com/leandernikolaus/HotStuff-ivy)
-- [SplitBFT] _SplitBFT: Improving Byzantine fault tolerance safety using trusted compartments_ [Paper](https://doi.org/10.1145/3528535.3531516) and [Proof](https://github.com/leandernikolaus/splitbft-proofs)
+- [HotStuff] _Formal Verification of HotStuff_. In: FORTE 2021 [Paper][1]
+- [HotStuff spec] _Specification and proof in Ivy and TLAPS_ [HotStuff Spec][2]
+- [SplitBFT] _SplitBFT: Improving Byzantine fault tolerance safety using trusted compartments_ [Paper][3] and [Proof][4].
 -
+
+[1]: https://doi.org/10.1007/978-3-030-78089-0_13
+[2]: https://github.com/leandernikolaus/HotStuff-ivy
+[3]: https://doi.org/10.1145/3528535.3531516
+[4]: https://github.com/leandernikolaus/splitbft-proofs

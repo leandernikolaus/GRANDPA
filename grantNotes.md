@@ -176,7 +176,7 @@ Relying on a language like Quint, it would be possible that the specification in
 
 Our research group has made good experience, integrating formal tools for testing.
 For example, our open-source HotStuff framework includes an instance of the twin testing framework, to execute complex scenarios [Hotstuff impl].
-The group also has experience with test case generation [Hein].
+The group also has experience with test case generation [Test generation].
 
 ## References
 
@@ -186,6 +186,7 @@ The group also has experience with test case generation [Hein].
 - [Hotstuff impl.] _An Extensible Framework for Implementing and Validating
 Byzantine Fault-tolerant Protocols_ [Paper](https://uis.brage.unit.no/uis-xmlui/bitstream/handle/11250/3076643/Pnr%252B2160906.pdf) and [Code](https://github.com/relab/hotstuff/)
 - [SplitBFT] _SplitBFT: Improving Byzantine fault tolerance safety using trusted compartments_ [Paper](https://doi.org/10.1145/3528535.3531516) and [Proof](https://github.com/leandernikolaus/splitbft-proofs).
+- [Test generation] _Automated test case generation_ https://doi.org/10.1016/j.jlamp.2019.02.004
 
 ## Tools
 - [Ivy] McMillan, Kenneth L., and Oded Padon. _Ivy: A multi-modal verification tool for distributed algorithms._ CAV 2020. [Paper](https://link.springer.com/content/pdf/10.1007/978-3-030-53291-8_12.pdf)

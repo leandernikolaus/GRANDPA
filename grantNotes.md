@@ -19,6 +19,8 @@ _Goal: Formally specify and verify finality gadgets_
     - [Fairness Conditions](#fairness-conditions)
   - [#4 Use](#4-use)
   - [References](#references)
+  - [Our work](#our-work)
+  - [Tools](#tools)
 
 ## About us
 
@@ -56,8 +58,8 @@ This project focuses on the study of finality gadgets, such as GRANDPA, in contr
 
 The goal of the first stage is to create a simplified model of GRANDPA that supports both generation of live traces and proving safety properties.
 
-This stage will build on our prior experience with the formal verification of the [HotStuff algorithm][1].
-In our work on the HotStuff algorithm, we modeled consensus on a tree of blocks rather than the classical view instance matrix used by algorithms like Paxos and PBFT.
+This stage will build on our prior experience with the formal verification of the [HotStuff algorithm](https://dl.acm.org/doi/pdf/10.1145/3293611.3331591s).
+In our work on the HotStuff algorithm  [Hotstuff], we modeled consensus on a tree of blocks rather than the classical view instance matrix used by algorithms like Paxos and PBFT.
 We adjusted the safety properties to fit this tree structure.
 Instead of requiring that no two distinct values are decided in a single instance, we defined safety such that any two finalized blocks must be ancestors, preventing divergence into separate forks.
 
@@ -67,34 +69,34 @@ In our previous work, we established lemmas and auxiliary invariants around this
 
 ### Interface and Properties
 
-The goal for this stage is to define the interface of a finality gadget.
+Our first goal is to define the interface of a finality gadget.
 The description should include both properties which need to hold for the interface, as well as a description how the finality module fits in to the overall system.
 
 ### Model and REPL Runs
 
-The first step is to formalize a first variant the algorithm and produce several runs, that show the model behaves as expected.
-Many tool have a built-in read evaluate print loop for this purpose [Ivy, Quint].
+Second, we aim to formalize a first variant the algorithm and produce several runs, that show the model behaves as expected.
+Many tools have a built-in read evaluate print loop for this purpose [Ivy, Quint].
 
 It is especially important to produce traces that show the algorithm is live, e.g. a block can be finalized.
 Produced runs should be maintained as test cases, to be run iteratively, when changing the model.
 
 ### Safety in Finite Models
 
-The second step is to verify safety in finite models.
+The third goal is to verify safety in finite models.
 This means to show for example that in a system with 4 validators, up to 3 blocks and running at most 3 rounds of GRANDPA, no two blocks on different forks are finalized.
 Such analysis can be done by finite model checkers like TLC or Apalache.
 Starting with a minimal viable example, the system size can be successively increased.
 
 ### Safety Proof
 
-The last step in this part of the project is to verify safety in a variable system, i.e. without binding the number of validators or blocks or rounds.
+The last goal in this stage of the project is to verify safety in a parametrized system, i.e. without binding the number of validators or blocks or rounds.
 In our previous work, we have derived such proofs both automatically, by using the Ivy tool, and by writing a manual, automatically verified, proof in TLAPS.
 Other popular tools to derive such proofs are Coq and Dafny.
 
 Ivy can helps a user to find an inductive invariant and thus prove safety properties.
 This requires little manual work.
 However, for a specification to work well with Ivy, it is advantageous to rewrite the specification, e.g. introducing free variables instead of existential quantification or replacing functions with predicates.
-While this technique can allows to prove safety properties quite fast, the rewriting slightly obfuscates the specification.
+While this technique can allow to prove safety properties quite fast, the rewriting slightly obfuscates the specification.
 
 TLAPS on the other hand allows to write manual proofs for safety properties and automatically verify the individual proof steps.
 While this may require more effort than a proof in Ivy, it does not require rewriting of the specification.
@@ -111,7 +113,7 @@ First, K, Coq, and Dafny have all be used to verify Casper FFG.
 We want to investigate if building on these existing proofs would simplify verifying GRANDPA.
 
 Further, we want to investigate using Quint alongside TLA+.
-While Quint does not support TLAPS or a full safety proof, it could be used for specification, REPL and finite model steps.
+While Quint does not support TLAPS or a full safety proof, it could be used for specification, REPL and finite model goals.
 Quint claims to provide more developer friendly tooling than TLA+ and thus, having the specification available in Quint may be beneficial.
 
 ### Comparison
@@ -173,19 +175,23 @@ Another possible use of our specification would be to update the existing GRANDP
 Relying on a language like Quint, it would be possible that the specification indeed is the formal model.
 
 Our research group has made good experience, integrating formal tools for testing.
-For example, our open-source HotStuff framework includes an instance of the twin testing framework, to execute complex scenarios.
+For example, our open-source HotStuff framework includes an instance of the twin testing framework, to execute complex scenarios [Hotstuff impl].
 The group also has experience with test case generation [Hein].
 
 ## References
 
-- [HotStuff] _Formal Verification of HotStuff_. In: FORTE 2021 [Paper][1]
-- [HotStuff spec] _Specification and proof in Ivy and TLAPS_ [HotStuff Spec][2]
-- [SplitBFT] _SplitBFT: Improving Byzantine fault tolerance safety using trusted compartments_ [Paper][3] and [Proof][4].
--
+## Our work
+- [HotStuff] _Formal Verification of HotStuff_. In: FORTE 2021 [Paper](https://uis.brage.unit.no/uis-xmlui/bitstream/handle/11250/3054769/1968160_Jehl.pdf)
+- [HotStuff spec] _Specification and proof in Ivy and TLAPS_ [HotStuff Spec](https://github.com/leandernikolaus/HotStuff-ivy)
+- [Hotstuff impl.] _An Extensible Framework for Implementing and Validating
+Byzantine Fault-tolerant Protocols_ [Paper](https://uis.brage.unit.no/uis-xmlui/bitstream/handle/11250/3076643/Pnr%252B2160906.pdf) and [Code](https://github.com/relab/hotstuff/)
+- [SplitBFT] _SplitBFT: Improving Byzantine fault tolerance safety using trusted compartments_ [Paper](https://doi.org/10.1145/3528535.3531516) and [Proof](https://github.com/leandernikolaus/splitbft-proofs).
 
-[1]: https://doi.org/10.1007/978-3-030-78089-0_13
-[2]: https://github.com/leandernikolaus/HotStuff-ivy
-[3]: https://doi.org/10.1145/3528535.3531516
-[4]: https://github.com/leandernikolaus/splitbft-proofs
+## Tools
+- [Ivy] McMillan, Kenneth L., and Oded Padon. _Ivy: A multi-modal verification tool for distributed algorithms._ CAV 2020. [Paper](https://link.springer.com/content/pdf/10.1007/978-3-030-53291-8_12.pdf)
+- [Quint] *A modern and executable specification language* https://quint-lang.org
+- [TLA+ and TLC] Leslie Lamport. _The TLA+ Home Page_ https://lamport.azurewebsites.net/tla/tla.html
+- [TLAPS] _The TLA+ Proof System_ https://proofs.tlapl.us
+
 
 ---
